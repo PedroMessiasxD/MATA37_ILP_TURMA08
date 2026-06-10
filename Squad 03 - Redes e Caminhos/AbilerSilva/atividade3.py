@@ -8,21 +8,17 @@ def letra_maior(w):
         return "no answer"
     #Encontra o menor caractere maior que o principal
     j = len(letras) - 1
-
     while letras[j] <= letras[i]:
         j -= 1
     #Troca as letras
     letras[i], letras[j] = letras[j], letras[i]
-
-    #Inverter a parte da direita
+    #Inverte a parte da direita
     esquerda = i + 1
     direita = len(letras) - 1
-
     while esquerda < direita:
         letras[esquerda], letras[direita] = letras[direita], letras[esquerda]
         esquerda += 1
         direita -= 1
-
     return "".join(letras)
 numero = int(input())
 for i in range(numero):
