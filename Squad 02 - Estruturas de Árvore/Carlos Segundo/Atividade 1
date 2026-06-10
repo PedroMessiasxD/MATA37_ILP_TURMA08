@@ -1,0 +1,7 @@
+Resolução:
+#  necessário definir a variável que vai ser somada
+def soma_final(a,b):
+return a + b 
+
+#para visualização:
+print (soma_final)
