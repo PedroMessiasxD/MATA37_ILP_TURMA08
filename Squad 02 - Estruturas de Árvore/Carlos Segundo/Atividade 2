@@ -1,0 +1,10 @@
+Resolução:
+#precisamos definir a soma primeiro
+def soma_lista(ar)
+#o (ar) é função própria definido no enunciado (pode assumir qualquer nomenclatura)
+#como é uma lista cria um array
+# se nao tiver sido feito, defino o array como 
+lista= [1,  2,  3, 4, 10,  11]
+#depois soma os itens dentro desse array
+
+return sum (ar)
