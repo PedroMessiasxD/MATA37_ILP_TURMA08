@@ -1,1 +1,11 @@
+def soma(a, b):
+    resultado = a + b
+    return resultado
 
+a = int(input("Digite o primeiro número: "))
+b = int(input("Digite o segundo número: "))
+
+if 1 <= a <= 1000 and 1 <= b <= 1000:
+    print("Resultado:", soma(a, b))
+else:
+    print("Erro: os valores devem estar entre 1 e 1000.")
