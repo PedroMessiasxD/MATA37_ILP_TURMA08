@@ -1,0 +1,9 @@
+def somar(a, b):
+    return a + b
+
+try:
+    a = int(input("Digite o valor da variável a: "))
+    b = int(input("Digite o valor da variável b: "))
+    print(f"Explicação: {a} + {b} = {somar(a, b)}")
+except ValueError:
+    print("Erro: Digite apenas números inteiros.")
