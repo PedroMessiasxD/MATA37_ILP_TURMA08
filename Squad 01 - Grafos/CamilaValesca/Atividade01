@@ -1,1 +1,9 @@
+def soma (a,b):
+    if a>= 1 and b<=1000:
+        resultado = a + b
+        return resultado
+    else:
+        return "Erro"
 
+total = soma(2,3)
+print (F"O total da soma é {total}")
