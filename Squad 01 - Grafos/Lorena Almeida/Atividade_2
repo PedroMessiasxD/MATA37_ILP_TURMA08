@@ -1,13 +1,25 @@
-def somar_elementos(ar, n):
-    soma_total = 0
-    
-    for i in range(0, n):
-        soma_total = soma_total + ar[i]
-        
-    return soma_total
+def soma_elementos(ar):
+    soma = 0
+
+    for elemento in ar:
+        soma = soma + elemento
+
+    return soma
 
 
-# teste: [1, 2, 3, 4, 10, 11] deve dar 31
-conjunto = [1, 2, 3, 4, 10, 11]
-tamanho = 6
-print("Teste Atividade 2:", somar_elementos(conjunto, tamanho))
+n = int(input("Digite o tamanho do array: "))
+ar = list(map(int, input("Digite os elementos separados por espaço: ").split()))
+
+if len(ar) == n:
+    valido = True
+
+    for elemento in ar:
+        if elemento <= 0 or elemento > 1000:
+            valido = False
+
+    if valido:
+        print("Soma dos elementos:", soma_elementos(ar))
+    else:
+        print("Erro: os elementos devem estar entre 1 e 1000.")
+else:
+    print("Erro: quantidade de elementos diferente do tamanho informado.")
