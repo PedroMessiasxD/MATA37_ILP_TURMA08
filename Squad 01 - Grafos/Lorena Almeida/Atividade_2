@@ -22,7 +22,7 @@ if len(ar) == n:
         if elemento <= 0 or elemento > 1000:
             valido = False
 
-#exibir o resultado
+#condição para exibir o resultado
     if valido:
         print("Soma dos elementos:", soma_elementos(ar))
     else:
