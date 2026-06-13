@@ -1,1 +1,13 @@
+def somar_elementos(ar, n):
+    soma_total = 0
+    
+    for i in range(0, n):
+        soma_total = soma_total + ar[i]
+        
+    return soma_total
 
+
+# teste do enunciado: [1, 2, 3, 4, 10, 11] deve dar 31
+conjunto = [1, 2, 3, 4, 10, 11]
+tamanho = 6
+print("Teste Atividade 2:", somar_elementos(conjunto, tamanho))
