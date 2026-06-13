@@ -7,7 +7,7 @@ def somar_elementos(ar, n):
     return soma_total
 
 
-# teste do enunciado: [1, 2, 3, 4, 10, 11] deve dar 31
+# teste: [1, 2, 3, 4, 10, 11] deve dar 31
 conjunto = [1, 2, 3, 4, 10, 11]
 tamanho = 6
 print("Teste Atividade 2:", somar_elementos(conjunto, tamanho))
