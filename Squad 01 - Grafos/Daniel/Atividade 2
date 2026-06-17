@@ -1,0 +1,18 @@
+def soma_array(ar):
+    """
+    Recebe um array de inteiros e retorna a soma de seus elementos,
+    calculada manualmente com laço de repetição (sem usar sum()).
+    """
+    total = 0
+    for i in range(len(ar)):
+        total = total + ar[i]
+    return total
+
+
+# Leitura da entrada (STDIN)
+n = int(input())
+ar = list(map(int, input().split()))
+
+# Chamada da função e impressão do resultado
+resultado = soma_array(ar)
+print(resultado)
