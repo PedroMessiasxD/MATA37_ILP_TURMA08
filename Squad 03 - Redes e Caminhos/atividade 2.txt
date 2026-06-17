@@ -1,0 +1,19 @@
+def calcular_soma_da_lista(lista_de_numeros):
+    total = 0
+    
+    for numero in lista_de_numeros:
+        total = total + numero
+        
+    return total
+
+n = int(input())
+
+textos_separados = input().split()
+
+
+meus_numeros = []
+for texto in textos_separados:
+    meus_numeros.append(int(texto))  
+
+resultado = calcular_soma_da_lista(meus_numeros)
+print(resultado)
