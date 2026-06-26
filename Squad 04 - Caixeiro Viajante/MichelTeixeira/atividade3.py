@@ -1,3 +1,6 @@
+import sys
+
+
 def proxima_palavra(w):
     n = len(w)
 
@@ -15,7 +18,6 @@ def proxima_palavra(w):
     # Procurar a menor letra maior que o pivô no lado direito
     indice_melhor = -1
     i = posicao + 1
-
     while i < n:
         if w[i] > pivo:
             if indice_melhor == -1 or w[i] < w[indice_melhor]:
@@ -70,38 +72,16 @@ def proxima_palavra(w):
     return resposta
 
 
-print("=== Atividade 3: Próxima Palavra Lexicográfica ===")
-print()
-print("Primeiro, digite a quantidade de palavras que serão testadas.")
-print("Depois, digite uma palavra por linha.")
-print()
-print("Exemplo de entrada:")
-print("5")
-print("ab")
-print("bb")
-print("hefg")
-print("dhck")
-print("dkhc")
-print()
-print("Agora é sua vez.")
-print()
+# Leitura no formato do enunciado:
+# 1ª linha: T (número de casos). Em seguida, T linhas, cada uma com uma palavra.
+# Lê tudo de uma vez e junta a saída no final (rápido para T até 10^5).
+entrada = sys.stdin.read().split()
+t = int(entrada[0])
 
-entrada_t = input("Digite a quantidade de palavras: ")
+resultados = []
+i = 1
+while i <= t:
+    resultados.append(proxima_palavra(entrada[i]))
+    i += 1
 
-while not entrada_t.isdigit():
-    print("Erro: você deve digitar um número inteiro.")
-    entrada_t = input("Digite a quantidade de palavras: ")
-
-t = int(entrada_t)
-
-contador = 1
-
-while contador <= t:
-    palavra = input("Digite a palavra " + str(contador) + ": ")
-
-    resultado = proxima_palavra(palavra)
-
-    print("Resultado:", resultado)
-    print()
-
-    contador += 1
+print("\n".join(resultados))
