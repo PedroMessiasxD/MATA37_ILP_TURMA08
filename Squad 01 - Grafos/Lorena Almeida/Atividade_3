@@ -1,35 +1,51 @@
 def proxima_maior_palavra(w):
     letras = list(w)
     tamanho = len(letras)
-    
+
+    # Encontra o pivô
     i = tamanho - 2
     while i >= 0 and letras[i] >= letras[i + 1]:
         i -= 1
-        
+
+    # Se não existir pivô, não há resposta
     if i == -1:
         return "no answer"
-        
+
+    # Encontra o menor caractere maior que o pivô
     j = tamanho - 1
     while letras[j] <= letras[i]:
         j -= 1
-        
+
+    # Troca os caracteres
     temp = letras[i]
     letras[i] = letras[j]
     letras[j] = temp
-    
+
+    # Inverte a parte da direita
     esquerda = i + 1
     direita = tamanho - 1
+
     while esquerda < direita:
         temp = letras[esquerda]
         letras[esquerda] = letras[direita]
         letras[direita] = temp
+
         esquerda += 1
         direita -= 1
-        
+
     palavra_final = "".join(letras)
     return palavra_final
 
-# meu teste
-print("Teste Atividade 3 (ab):", proxima_maior_palavra("ab"))
-print("Teste Atividade 3 (bb):", proxima_maior_palavra("bb"))
-print("Teste Atividade 3 (hefg):", proxima_maior_palavra("hefg"))
+
+# Testes
+print("Teste (ab):", proxima_maior_palavra("ab"))
+print("Teste (bb):", proxima_maior_palavra("bb"))
+print("Teste (hefg):", proxima_maior_palavra("hefg"))
+print("Teste (dhck):", proxima_maior_palavra("dhck"))
+print("Teste (dkhc):", proxima_maior_palavra("dkhc"))
+Saída esperada
+Teste (ab): ba
+Teste (bb): no answer
+Teste (hefg): hegf
+Teste (dhck): dhkc
+Teste (dkhc): hcdk
