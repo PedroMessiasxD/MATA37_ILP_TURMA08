@@ -1,74 +1,83 @@
-def organizingContainers(containers):
+def organizar_conteineres(conteineres):
 
-    n = len(containers)
+    quantidade = len(conteineres)
 
-    capacidade = []
-    tipos = []
+    capacidade_conteineres = []
+    quantidade_bolas_tipo = []
 
-    # Soma das linhas (capacidade de cada contêiner)
-    for i in range(n):
-
-        soma = 0
-
-        for j in range(n):
-            soma += containers[i][j]
-
-        capacidade.append(soma)
-
-    # Soma das colunas (quantidade de cada tipo)
-    for j in range(n):
+    #soma das linhas (capacidade de cada contêiner)
+    for linha in range(quantidade):
 
         soma = 0
 
-        for i in range(n):
-            soma += containers[i][j]
+        for coluna in range(quantidade):
+            soma += conteineres[linha][coluna]
 
-        tipos.append(soma)
+        capacidade_conteineres.append(soma)
 
-    # Ordena manualmente os dois vetores (Selection Sort)
-    for i in range(n):
+    #soma das colunas (quantidade de cada tipo de bola)
+    for coluna in range(quantidade):
+
+        soma = 0
+
+        for linha in range(quantidade):
+            soma += conteineres[linha][coluna]
+
+        quantidade_bolas_tipo.append(soma)
+
+    #ordenação manual da capacidade dos contêineres
+    for i in range(quantidade - 1):
 
         menor = i
 
-        for j in range(i + 1, n):
+        for j in range(i + 1, quantidade):
 
-            if capacidade[j] < capacidade[menor]:
+            if capacidade_conteineres[j] < capacidade_conteineres[menor]:
                 menor = j
 
-        capacidade[i], capacidade[menor] = capacidade[menor], capacidade[i]
+        auxiliar = capacidade_conteineres[i]
+        capacidade_conteineres[i] = capacidade_conteineres[menor]
+        capacidade_conteineres[menor] = auxiliar
 
-    for i in range(n):
+    #ordenação manual da quantidade de bolas por tipo
+    for i in range(quantidade - 1):
 
         menor = i
 
-        for j in range(i + 1, n):
+        for j in range(i + 1, quantidade):
 
-            if tipos[j] < tipos[menor]:
+            if quantidade_bolas_tipo[j] < quantidade_bolas_tipo[menor]:
                 menor = j
 
-        tipos[i], tipos[menor] = tipos[menor], tipos[i]
+        auxiliar = quantidade_bolas_tipo[i]
+        quantidade_bolas_tipo[i] = quantidade_bolas_tipo[menor]
+        quantidade_bolas_tipo[menor] = auxiliar
 
-    # Compara elemento por elemento
-    for i in range(n):
+    #compara os vetores
+    for i in range(quantidade):
 
-        if capacidade[i] != tipos[i]:
+        if capacidade_conteineres[i] != quantidade_bolas_tipo[i]:
             return "Impossible"
 
     return "Possible"
 
 
-q = int(input())
+#entradas
 
-for _ in range(q):
+quantidade_consultas = int(input("Digite a quantidade de consultas: "))
 
-    n = int(input())
+for consulta in range(quantidade_consultas):
 
-    containers = []
+    quantidade_conteineres = int(input("Digite a quantidade de contêineres: "))
 
-    for i in range(n):
+    conteineres = []
 
-        linha = list(map(int, input().split()))
+    print("Digite a matriz com espaço entre os números:")
 
-        containers.append(linha)
+    for linha in range(quantidade_conteineres):
 
-    print(organizingContainers(containers))
+        valores = list(map(int, input(f"Linha {linha + 1}: ").split()))
+
+        conteineres.append(valores)
+
+    print("Resultado:", organizar_conteineres(conteineres))
