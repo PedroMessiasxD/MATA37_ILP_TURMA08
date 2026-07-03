@@ -1,1 +1,74 @@
+def organizingContainers(containers):
 
+    n = len(containers)
+
+    capacidade = []
+    tipos = []
+
+    # Soma das linhas (capacidade de cada contêiner)
+    for i in range(n):
+
+        soma = 0
+
+        for j in range(n):
+            soma += containers[i][j]
+
+        capacidade.append(soma)
+
+    # Soma das colunas (quantidade de cada tipo)
+    for j in range(n):
+
+        soma = 0
+
+        for i in range(n):
+            soma += containers[i][j]
+
+        tipos.append(soma)
+
+    # Ordena manualmente os dois vetores (Selection Sort)
+    for i in range(n):
+
+        menor = i
+
+        for j in range(i + 1, n):
+
+            if capacidade[j] < capacidade[menor]:
+                menor = j
+
+        capacidade[i], capacidade[menor] = capacidade[menor], capacidade[i]
+
+    for i in range(n):
+
+        menor = i
+
+        for j in range(i + 1, n):
+
+            if tipos[j] < tipos[menor]:
+                menor = j
+
+        tipos[i], tipos[menor] = tipos[menor], tipos[i]
+
+    # Compara elemento por elemento
+    for i in range(n):
+
+        if capacidade[i] != tipos[i]:
+            return "Impossible"
+
+    return "Possible"
+
+
+q = int(input())
+
+for _ in range(q):
+
+    n = int(input())
+
+    containers = []
+
+    for i in range(n):
+
+        linha = list(map(int, input().split()))
+
+        containers.append(linha)
+
+    print(organizingContainers(containers))
