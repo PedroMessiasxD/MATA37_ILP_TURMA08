@@ -1,0 +1,48 @@
+#para solucionar precisamos iniciar sabendo o número de containers e a capacidade deles de bolas por tipo (necessario haver equivalência)
+
+def organizingContainers(container): 
+  n = len(container) 
+
+   capacidades_conteineres = [] #definido pela soma das Linhas
+   for i in range(n): 
+         capacidades_conteineres.append(sum(container[i])) 
+
+   quantidades_tipos = [0] * n #definido pela soma das colunas e [0] inicia  alista de bolas 
+   for i in range(n): 
+         for j in range(n): 
+               quantidades_tipos[j] = quantidades_tipos[j] + container[i][j] 
+
+
+#ordenar as listas
+capacidades_conteineres.sort() 
+quantidades_tipos.sort() 
+
+#comparar as listas para saber se é possivel (como so altera as bolas a quantidade de tipos de bolas devem ser iguais a de containers
+if capacidades_conteineres == quantidades_tipos: 
+     return "Possible" 
+  else: 
+     return "Impossible" 
+
+#iniciar a testagem dos containers e tipos de bola
+if __name__ == "__main__": #uso de "__main__" como reserva de linguagem
+      import sys
+
+#organização dos dados em lotes
+input_data = sys.stdin.read().split() 
+if input_data:
+     iterator = iter(input_data)  
+         q = int(next(iterator)) 
+         for _ in range(q): 
+              n = int(next(iterator)) 
+
+#montar a organização final do cantainer
+               container = []
+               for i in range(n):
+                       linha = [] 
+                       for j in range(n): 
+                             linha.append(int(next(iterator))) 
+                       container.append(linha) 
+
+#visualização do resultado
+resultado = organizingContainers(container) 
+print(resultado) 
