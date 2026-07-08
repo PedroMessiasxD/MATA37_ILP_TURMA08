@@ -1,31 +1,59 @@
 using System;
-using System.Linq;
 
 class Result
 {
+    static void BubbleSort(long[] vetor)
+    {
+        int n = vetor.Length;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (vetor[j] > vetor[j + 1])
+                {
+                    long aux = vetor[j];
+                    vetor[j] = vetor[j + 1];
+                    vetor[j + 1] = aux;
+                }
+            }
+        }
+    }
+
+    static bool VetoresIguais(long[] a, long[] b)
+    {
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] != b[i])
+                return false;
+        }
+
+        return true;
+    }
+
     public static string organizingContainers(int[][] container)
     {
         int n = container.Length;
 
-        long[] containers = new long[n];
-        long[] types = new long[n];
+        long[] capacidadeContainer = new long[n];
+        long[] quantidadeTipo = new long[n];
 
         for (int i = 0; i < n; i++)
         {
-            containers[i] = container[i].Sum(x => (long)x);
-
             for (int j = 0; j < n; j++)
             {
-                types[j] += container[i][j];
+                capacidadeContainer[i] += container[i][j];
+                quantidadeTipo[j] += container[i][j];
             }
         }
 
-        Array.Sort(containers);
-        Array.Sort(types);
+        BubbleSort(capacidadeContainer);
+        BubbleSort(quantidadeTipo);
 
-        return containers.SequenceEqual(types)
-            ? "Possible"
-            : "Impossible";
+        if (VetoresIguais(capacidadeContainer, quantidadeTipo))
+            return "Possible";
+
+        return "Impossible";
     }
 }
 
@@ -35,7 +63,7 @@ class Solution
     {
         int q = int.Parse(Console.ReadLine());
 
-        while (q-- > 0)
+        while (q > 0)
         {
             int n = int.Parse(Console.ReadLine());
 
@@ -43,13 +71,19 @@ class Solution
 
             for (int i = 0; i < n; i++)
             {
-                container[i] = Console.ReadLine()
-                    .Split()
-                    .Select(int.Parse)
-                    .ToArray();
+                container[i] = new int[n];
+
+                string[] valores = Console.ReadLine().Split();
+
+                for (int j = 0; j < n; j++)
+                {
+                    container[i][j] = int.Parse(valores[j]);
+                }
             }
 
             Console.WriteLine(Result.organizingContainers(container));
+
+            q--;
         }
     }
 }
