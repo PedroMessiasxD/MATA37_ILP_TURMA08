@@ -1,4 +1,4 @@
-def soma_array_monstra(ar):
+def soma_array(ar):
     soma = 0
 
     for i in range(len(ar)):
@@ -7,33 +7,34 @@ def soma_array_monstra(ar):
     return soma
 
 
-print("Digite o tamanho do array:")
 n = int(input())
 
-if n <= 0:
-    print("Erro: o tamanho do array deve ser maior que 0.")
-else:
-    print(f"Digite {n} números separados por espaço:")
+while n <= 0:
+    n = int(input())
+
+entrada = input().split()
+
+while len(entrada) != n:
     entrada = input().split()
 
-    if len(entrada) != n:
-        print(f"Erro: você deve digitar exatamente {n} números.")
-    else:
-        ar = []
-        entrada_valida = True
+ar = []
+entrada_valida = False
 
-        for i in range(n):
-            numero = int(entrada[i])
+while entrada_valida == False:
+    ar = []
+    entrada_valida = True
 
-            if numero <= 0 or numero > 1000:
-                entrada_valida = False
+    for i in range(n):
+        numero = int(entrada[i])
 
-            ar.append(numero)
+        if numero <= 0 or numero > 1000:
+            entrada_valida = False
 
-        if entrada_valida == False:
-            print("Erro: todos os números devem estar entre 1 e 1000.")
-        else:
-            resultado = soma_array_monstra(ar)
+        ar.append(numero)
 
-            print("A soma dos elementos do array é:")
-            print(resultado)
+    if entrada_valida == False:
+        entrada = input().split()
+
+resultado = soma_array(ar)
+
+print(resultado)
