@@ -1,0 +1,31 @@
+#variável acumuladora
+def soma_elementos(ar):
+    soma = 0
+
+#adicionar cada elemento a soma (acumuladora)
+    for elemento in ar:
+        soma = soma + elemento
+
+#retornar resultado do que foi acumulado
+    return soma
+
+#ler o tamanho do array 
+n = int(input("Digite o tamanho do array: "))
+#ler os elementos do array
+ar = list(map(int, input("Digite os elementos separados por espaço: ").split()))
+
+if len(ar) == n:
+    valido = True
+
+#percorrer todos os elementos do conjunto
+    for elemento in ar:
+        if elemento <= 0 or elemento > 1000:
+            valido = False
+
+#condição para exibir o resultado
+    if valido:
+        print("Soma dos elementos:", soma_elementos(ar))
+    else:
+        print("Erro: os elementos devem estar entre 1 e 1000.")
+else:
+    print("Erro: quantidade de elementos diferente do tamanho informado.")

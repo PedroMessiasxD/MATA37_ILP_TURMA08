@@ -1,0 +1,49 @@
+Resolução:
+#identificar na palavra qual a ordem das letras e transformar o texto (string) em lista para permitir alteração de itens conforme enunciado (acabei de descobrir q um array é diferente de lista pq array precisa de elementos do mesmo tipo como por ex número)
+def palavra_nova(w): 
+   letras = list(w) 
+   n = len(letras) 
+
+#usar o index pivô para identificar a ordem da lista e iniciar o processo de mudança para organizar no formato desejado
+
+pivo_idx = -1 #(-1 como flag)
+for i in range(n - 2, -1, -1): 
+    if letras[i] < letras[i + 1]: 
+        pivo_idx = i 
+        break 
+
+#se nao tiver pivo (odiei que o retorno esse tem q ser exclusivamente "no answer" grr)
+if pivo_idx == -1: 
+   return "no answer"  
+
+final= letras[pivo_idx + 1:] 
+
+#organizar a lista com as letras do pivo, mas definir qual é a maior e menor letra, para isso temos duas opções:
+
+candidatos = []
+for letra in cauda: 
+    if letra > letras[pivo_idx]: 
+         candidatos.append(letra) 
+
+#ou a versão resumida que faz a mesma coisa:
+candidatos = [letra for letra in final if letra > letras[pivo_idx]]
+
+
+#ai tenho q descobrir a menor letra e depois descobrir a posição exata dela
+letra_escolhida = min(candidatos) 
+
+idx_na_cauda = len(final) - 1 - final[::-1].index(letra_escolhida) 
+
+final.pop(idx_na_cauda) 
+
+#utilizar o append para anexar o pivo separado acima no final da lista
+final.append(letras[pivo_idx]) 
+
+#o sort para organizar os elementos em ordem crescente (no caso em ordem alfabética)
+final.sort() 
+
+#retomar ao inicio para completar a palavra (o : serve no caso para “excluir”/dividir o pivo nesse código, entao pega todods os elementos exceto o pivo)
+inicio = letras[:pivo_idx] 
+resultado = inicio + [letra_escolhida] + final 
+
+return "".join(resultado) 

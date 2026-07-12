@@ -1,0 +1,44 @@
+def proxima_palavra(palavra):
+    letras = list(palavra)
+    tamanho = len(letras)
+
+    posicao_troca = -1
+    for i in range(tamanho - 2, -1, -1): 
+        if letras[i] < letras[i + 1]:
+            posicao_troca = i
+            break 
+
+    if posicao_troca == -1:
+        return "no answer"
+
+    posicao_substituto = -1
+    for i in range(tamanho - 1, posicao_troca, -1): 
+        if letras[i] > letras[posicao_troca]:
+            posicao_substituto = i
+            break
+
+    gaveta = letras[posicao_troca]
+    letras[posicao_troca] = letras[posicao_substituto]
+    letras[posicao_substituto] = gaveta
+
+    parte_esquerda = letras[:posicao_troca + 1]
+    parte_direita = letras[posicao_troca + 1:]
+    
+    parte_direita_invertida = []
+    for i in range(len(parte_direita) - 1, -1, -1):
+        parte_direita_invertida.append(parte_direita[i])
+
+    lista_final = parte_esquerda + parte_direita_invertida
+
+    resultado = ""
+    for letra in lista_final:
+        resultado = resultado + letra
+
+    return resultado
+
+
+T = int(input()) 
+
+for i in range(T):
+    texto = input() 
+    print(proxima_palavra(texto))

@@ -1,0 +1,51 @@
+def proxima_palavra(w):
+    """
+    Retorna a próxima palavra lexicograficamente maior,
+    ou 'no answer' se não existir.
+    """
+    letras = list(w)
+    n = len(letras)
+
+    # Passo 1: encontrar o pivô (da direita para a esquerda)
+    pivo = -1
+    for i in range(n - 2, -1, -1):
+        if letras[i] < letras[i + 1]:
+            pivo = i
+            break
+
+    # Passo 2: se não há pivô, não existe palavra maior
+    if pivo == -1:
+        return "no answer"
+
+    # Passo 3: encontrar o menor caractere à direita do pivô
+    # que seja maior que letras[pivo]
+    menor_maior_idx = pivo + 1
+    for j in range(pivo + 1, n):
+        if letras[j] > letras[pivo] and letras[j] < letras[menor_maior_idx]:
+            menor_maior_idx = j
+
+    # Passo 4: trocar pivô com esse caractere
+    letras[pivo], letras[menor_maior_idx] = letras[menor_maior_idx], letras[pivo]
+
+    # Passo 5: ordenar manualmente (bubble sort) a parte após o pivô,
+    # em ordem crescente, para obter a menor combinação possível
+    inicio = pivo + 1
+    for i in range(inicio, n):
+        for j in range(inicio, n - 1 - (i - inicio)):
+            if letras[j] > letras[j + 1]:
+                letras[j], letras[j + 1] = letras[j + 1], letras[j]
+
+    # Reconstrói a string manualmente (sem usar ''.join() seria opcional,
+    # mas join não "resolve o problema", apenas concatena - uso permitido)
+    resultado = ""
+    for letra in letras:
+        resultado = resultado + letra
+
+    return resultado
+
+
+# Leitura da entrada (STDIN)
+t = int(input())
+for _ in range(t):
+    w = input().strip()
+    print(proxima_palavra(w))

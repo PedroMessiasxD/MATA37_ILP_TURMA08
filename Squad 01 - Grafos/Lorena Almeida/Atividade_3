@@ -1,0 +1,52 @@
+def proxima_maior_palavra(palavra):
+
+    #transforma a palavra em uma lista de letras
+    letras = list(palavra)
+    tamanho = len(letras)
+
+    #procura o pivô da direita para a esquerda
+    indice_pivo = tamanho - 2
+
+    while indice_pivo >= 0 and letras[indice_pivo] >= letras[indice_pivo + 1]:
+        indice_pivo -= 1
+
+    #se não existir pivô, não existe resposta
+    if indice_pivo == -1:
+        return "no answer"
+
+    #procura a menor letra maior que o pivô
+    indice_troca = tamanho - 1
+
+    while letras[indice_troca] <= letras[indice_pivo]:
+        indice_troca -= 1
+
+    #faz a troca
+    auxiliar = letras[indice_pivo]
+    letras[indice_pivo] = letras[indice_troca]
+    letras[indice_troca] = auxiliar
+
+    #inverte a parte da direita
+    esquerda = indice_pivo + 1
+    direita = tamanho - 1
+
+    while esquerda < direita:
+
+        auxiliar = letras[esquerda]
+        letras[esquerda] = letras[direita]
+        letras[direita] = auxiliar
+
+        esquerda += 1
+        direita -= 1
+
+    return "".join(letras)
+
+
+#diz quantos testes irá realizar
+
+quantidade_testes = int(input("Digite a quantidade de casos de teste: "))
+
+for teste in range(quantidade_testes):
+
+    palavra = input(f"Digite a palavra {teste + 1}: ")
+
+    print("Resultado:", proxima_maior_palavra(palavra))

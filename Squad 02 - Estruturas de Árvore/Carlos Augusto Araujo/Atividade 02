@@ -1,0 +1,5 @@
+n = int(input("Digite o tamanho do array: "))
+elementos = input(f"Digite os {n} elementos separados por espaço: ").split()
+ar = [int(x) for x in elementos[:n]]
+soma = sum(ar)
+print(soma)

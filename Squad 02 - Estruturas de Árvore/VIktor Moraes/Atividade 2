@@ -1,0 +1,9 @@
+def soma_array(arr):
+    total=0
+    for n in arr:
+        total+=n
+    return total
+
+n=int(input())
+arr=list(map(int,input().split()))
+print(soma_array(arr))

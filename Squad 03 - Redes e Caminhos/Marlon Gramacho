@@ -1,0 +1,10 @@
+def calcular_soma(a, b):
+    
+    resultado = a + b 
+    
+    return resultado
+
+# Exemplo 1
+a = 7
+b = 3
+print("Exemplo 1:", calcular_soma(a, b))
