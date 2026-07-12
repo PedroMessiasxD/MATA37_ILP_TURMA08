@@ -1,35 +1,52 @@
-def proxima_maior_palavra(w):
-    letras = list(w)
+def proxima_maior_palavra(palavra):
+
+    #transforma a palavra em uma lista de letras
+    letras = list(palavra)
     tamanho = len(letras)
-    
-    i = tamanho - 2
-    while i >= 0 and letras[i] >= letras[i + 1]:
-        i -= 1
-        
-    if i == -1:
+
+    #procura o pivô da direita para a esquerda
+    indice_pivo = tamanho - 2
+
+    while indice_pivo >= 0 and letras[indice_pivo] >= letras[indice_pivo + 1]:
+        indice_pivo -= 1
+
+    #se não existir pivô, não existe resposta
+    if indice_pivo == -1:
         return "no answer"
-        
-    j = tamanho - 1
-    while letras[j] <= letras[i]:
-        j -= 1
-        
-    temp = letras[i]
-    letras[i] = letras[j]
-    letras[j] = temp
-    
-    esquerda = i + 1
+
+    #procura a menor letra maior que o pivô
+    indice_troca = tamanho - 1
+
+    while letras[indice_troca] <= letras[indice_pivo]:
+        indice_troca -= 1
+
+    #faz a troca
+    auxiliar = letras[indice_pivo]
+    letras[indice_pivo] = letras[indice_troca]
+    letras[indice_troca] = auxiliar
+
+    #inverte a parte da direita
+    esquerda = indice_pivo + 1
     direita = tamanho - 1
+
     while esquerda < direita:
-        temp = letras[esquerda]
+
+        auxiliar = letras[esquerda]
         letras[esquerda] = letras[direita]
-        letras[direita] = temp
+        letras[direita] = auxiliar
+
         esquerda += 1
         direita -= 1
-        
-    palavra_final = "".join(letras)
-    return palavra_final
 
-# meu teste
-print("Teste Atividade 3 (ab):", proxima_maior_palavra("ab"))
-print("Teste Atividade 3 (bb):", proxima_maior_palavra("bb"))
-print("Teste Atividade 3 (hefg):", proxima_maior_palavra("hefg"))
+    return "".join(letras)
+
+
+#diz quantos testes irá realizar
+
+quantidade_testes = int(input("Digite a quantidade de casos de teste: "))
+
+for teste in range(quantidade_testes):
+
+    palavra = input(f"Digite a palavra {teste + 1}: ")
+
+    print("Resultado:", proxima_maior_palavra(palavra))

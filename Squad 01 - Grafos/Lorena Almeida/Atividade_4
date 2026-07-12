@@ -1,1 +1,83 @@
+def organizar_conteineres(conteineres):
 
+    quantidade = len(conteineres)
+
+    capacidade_conteineres = []
+    quantidade_bolas_tipo = []
+
+    #soma das linhas (capacidade de cada contêiner)
+    for linha in range(quantidade):
+
+        soma = 0
+
+        for coluna in range(quantidade):
+            soma += conteineres[linha][coluna]
+
+        capacidade_conteineres.append(soma)
+
+    #soma das colunas (quantidade de cada tipo de bola)
+    for coluna in range(quantidade):
+
+        soma = 0
+
+        for linha in range(quantidade):
+            soma += conteineres[linha][coluna]
+
+        quantidade_bolas_tipo.append(soma)
+
+    #ordenação manual da capacidade dos contêineres
+    for i in range(quantidade - 1):
+
+        menor = i
+
+        for j in range(i + 1, quantidade):
+
+            if capacidade_conteineres[j] < capacidade_conteineres[menor]:
+                menor = j
+
+        auxiliar = capacidade_conteineres[i]
+        capacidade_conteineres[i] = capacidade_conteineres[menor]
+        capacidade_conteineres[menor] = auxiliar
+
+    #ordenação manual da quantidade de bolas por tipo
+    for i in range(quantidade - 1):
+
+        menor = i
+
+        for j in range(i + 1, quantidade):
+
+            if quantidade_bolas_tipo[j] < quantidade_bolas_tipo[menor]:
+                menor = j
+
+        auxiliar = quantidade_bolas_tipo[i]
+        quantidade_bolas_tipo[i] = quantidade_bolas_tipo[menor]
+        quantidade_bolas_tipo[menor] = auxiliar
+
+    #compara os vetores
+    for i in range(quantidade):
+
+        if capacidade_conteineres[i] != quantidade_bolas_tipo[i]:
+            return "Impossible"
+
+    return "Possible"
+
+
+#entradas
+
+quantidade_consultas = int(input("Digite a quantidade de consultas: "))
+
+for consulta in range(quantidade_consultas):
+
+    quantidade_conteineres = int(input("Digite a quantidade de contêineres: "))
+
+    conteineres = []
+
+    print("Digite a matriz com espaço entre os números:")
+
+    for linha in range(quantidade_conteineres):
+
+        valores = list(map(int, input(f"Linha {linha + 1}: ").split()))
+
+        conteineres.append(valores)
+
+    print("Resultado:", organizar_conteineres(conteineres))
